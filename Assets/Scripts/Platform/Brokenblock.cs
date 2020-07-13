@@ -5,7 +5,7 @@ using UnityEngine;
 public class Brokenblock : MonoBehaviour
 {
     Animator anim;
-    
+
     void Start()
     {
         anim=GetComponent<Animator>();

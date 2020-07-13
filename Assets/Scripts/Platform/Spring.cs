@@ -16,6 +16,7 @@ public class Spring : MonoBehaviour
     public void trigger()
     {
         // 在动画结束前不会再次检测到这个弹簧
+        if(isTriggered) return;
         isTriggered=true;
         anim.SetBool("isTriggered",true);
         GetComponent<BoxCollider2D>().enabled=false;
