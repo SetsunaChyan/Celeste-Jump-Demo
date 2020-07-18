@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class Spring : MonoBehaviour
 {
-    // public float jumpPower;
     Animator anim;
     bool isTriggered=false;
+    AudioSource triggerAudio;
 
     void Start()
     {
         anim=GetComponent<Animator>();
+        triggerAudio=GetComponent<AudioSource>();
     }
 
     public void trigger()
@@ -20,6 +21,9 @@ public class Spring : MonoBehaviour
         isTriggered=true;
         anim.SetBool("isTriggered",true);
         GetComponent<BoxCollider2D>().enabled=false;
+
+        // 播放音效
+        triggerAudio.Play();
     }
 
     public void resume()

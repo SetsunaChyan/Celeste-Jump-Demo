@@ -40,12 +40,19 @@ public class PlayerController : MonoBehaviour
     public int jumpedTime;
     public UnityEngine.Object DustPrefabObj;
     GameObject buttomLine;
+    AudioSource deathAudio;
+    AudioSource jumpAudio;
+    AudioSource hitAudio;
 
     void Start()
     {
         BodyRB=GetComponent<Rigidbody2D>();
         BodyAnim=GetComponent<Animator>();
-        CheckOnGround();
+        var audioArray=GetComponents(typeof(AudioSource));
+        deathAudio=audioArray[0] as AudioSource;
+        jumpAudio=audioArray[1] as AudioSource;
+        hitAudio=audioArray[2] as AudioSource;
+        isOnGround=true;
         isDead=false;
         isOnWall=false;
         jumpedTime=0;
@@ -83,7 +90,10 @@ public class PlayerController : MonoBehaviour
             CreateDust();
             // 再次回到地面上刷新跳跃次数
             if(isOnGround)
+            {
                 jumpedTime=0;
+                hitAudio.Play();
+            }
             else 
                 jumpedTime=1;
         }
@@ -104,7 +114,7 @@ public class PlayerController : MonoBehaviour
         // 电脑调试用
         if(Input.GetAxisRaw("Horizontal")!=0)
             xVelocity=Input.GetAxisRaw("Horizontal")/4;
-        yVelocity=BodyRB.velocity.y+0.0f;
+        yVelocity=BodyRB.velocity.y+0.01f;
 
         // 防止下落速度过快导致的穿墙
         yVelocity=Mathf.Max(yVelocity,-5.0f);
@@ -135,6 +145,7 @@ public class PlayerController : MonoBehaviour
             float newVelocityY=Mathf.Min(Mathf.Max(BodyRB.velocity.y,0f)+jumpPower,7.0f)-BodyRB.velocity.y;
             BodyRB.velocity+=new Vector2(0,newVelocityY);
             jumpedTime++;
+            jumpAudio.Play();
         }
     }
 
@@ -193,6 +204,9 @@ public class PlayerController : MonoBehaviour
 
         // Dust动画保持静止防止漂移
         BodyRB.bodyType=RigidbodyType2D.Static;
+
+        // 播放音效
+        deathAudio.Play();
 
         Handheld.Vibrate();
 
