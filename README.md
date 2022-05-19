@@ -15,8 +15,8 @@ BGM from Cave Story (Theme Song).
 
 Dust and Madeline's hair:
 
-<img src="F:\UnityProjects\Celeste-Jump-Demo\pics\dust_and_hair.png" alt="dust" style="zoom:50%;" />
+<img src="pics\dust_and_hair.png" alt="dust" style="zoom:50%;" />
 
 Title, main scene and rankings ( for world top 10 😆):
 
-<img src="F:\UnityProjects\Celeste-Jump-Demo\pics\screenshot1.png" alt="screenshot1" style="zoom:100%;" />
+<img src="pics\screenshot1.png" alt="screenshot1" style="zoom:100%;" />
